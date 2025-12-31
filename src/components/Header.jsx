@@ -14,8 +14,18 @@ export default function Header() {
           </Typography>
         </Box>
 
-        {/* DS logo on the right, using SVG in public folder */}
-        <Box component="img" src="/ds-logo.svg" alt="DiscountShop logo" sx={{ height: 36, width: 'auto' }} />
+          {/* Logo on the right. Prefer /logo.png (your uploaded image); fall back to /ds-logo.svg */}
+          <Box
+            component="img"
+            src="/logo.jpeg"
+            alt="DavidsShop logo"
+            sx={{ height: 36, width: 'auto' }}
+            onError={(e) => {
+              // fallback to the SVG we generated earlier if /logo.png isn't present
+              e.currentTarget.onerror = null
+              e.currentTarget.src = '/ds-logo.svg'
+            }}
+          />
       </Container>
     </Box>
   )
