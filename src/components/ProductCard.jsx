@@ -16,7 +16,22 @@ export default function ProductCard({ product }) {
   return (
     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {image && (
-        <CardMedia component="img" height="160" image={image} alt={name} loading="lazy" />
+        // Show the full image (no cropping) while keeping a uniform container height.
+        // Use object-fit: contain and center the image. Add a subtle background so
+        // portrait/landscape images don't leave awkward white space.
+        <Box sx={{ height: 160, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#fafafa', overflow: 'hidden' }}>
+          <CardMedia
+            component="img"
+            image={image}
+            alt={name}
+            loading="lazy"
+            sx={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
+            onError={(e) => {
+              // hide broken images gracefully
+              e.currentTarget.style.display = 'none'
+            }}
+          />
+        </Box>
       )}
       <CardContent sx={{ flexGrow: 1 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: 1 }}>
