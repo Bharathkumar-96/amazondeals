@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Grid, Box, Typography, TextField } from '@mui/material'
+import products from '../data/products'
 import ProductCard from '../components/ProductCard'
 
 const categories = ['All', 'Electronics', 'Toys', 'Kitchen', 'Health', 'Books']
 
 export default function Home({ selectedCategory = 'All', searchQuery = '', onSearchChange }) {
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    const base = import.meta.env.VITE_API_BASE || ''
-    fetch(`${base}/api/products`)
-      .then((r) => r.json())
-      .then((data) => setProducts(data))
-      .catch((e) => console.error('failed to load products', e))
-  }, [])
-
   const filtered = products.filter((p) => {
     const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory
     const q = (searchQuery || '').trim().toLowerCase()

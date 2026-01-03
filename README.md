@@ -52,20 +52,10 @@ Next steps (suggested):
 - Add category filtering UI improvements and persistent sorting options.
 - Hook analytics to a backend or third-party tracker to capture clicks server-side.
  - Run the local API server to persist click counts to disk. Start it with:
+This project is a static React app (Vite + React + Material UI) intended for static hosting (Netlify, Vercel, GitHub Pages, etc.).
 
-```bash
-# from project root
-node server/index.js
-```
+Data
+- Product data lives in `src/data/products.js`. Update that file to change or add products. For static deployment, product data is baked into the build.
 
-By default the server listens on port 4000. In development set the Vite API base so the frontend calls it, for example:
-
-```bash
-VITE_API_BASE=http://localhost:4000 npm run dev
-```
-
-The server exposes:
-- GET /api/products — returns product array (includes `clicksCount`)
-- POST /api/click { productId } — increments `clicksCount` in `server/data/products.json`
-
-Important: A browser client cannot write directly to files on the server filesystem. The server provides a simple API that uses Node's `fs` to persist counts to `server/data/products.json`.
+Analytics
+- This repository contains a small client-side analytics helper in `src/utils/analytics.js` that records events to localStorage for quick testing. For production analytics and conversion tracking, connect your affiliate links to a real analytics provider.

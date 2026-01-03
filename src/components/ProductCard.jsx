@@ -48,23 +48,12 @@ export default function ProductCard({ product }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
-              // try to reliably send click to server. Use sendBeacon if available (survives navigation),
-              // otherwise fire-and-forget fetch.
+              // static app: no server-side click persistence. Keep local analytics only.
               try {
-                const base = import.meta.env.VITE_API_BASE || ''
-                const url = `${base}/api/click`
-                const payload = JSON.stringify({ productId: product.id })
-                if (navigator && typeof navigator.sendBeacon === 'function') {
-                  const blob = new Blob([payload], { type: 'application/json' })
-                  navigator.sendBeacon(url, blob)
-                } else {
-                  fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload }).catch((e) => console.warn('click update failed', e))
-                }
+                trackClick({ productId: product.id, name })
               } catch (e) {
-                console.warn('click tracking error', e)
+                console.warn('local analytics error', e)
               }
-              // always record local analytics as well
-              trackClick({ productId: product.id, name })
             }}
           >
             View Deal
