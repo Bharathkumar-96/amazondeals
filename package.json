@@ -24,7 +24,7 @@
     "@testing-library/jest-dom": "^6.0.0",
     "jsdom": "^22.1.0"
   },
-  },
+  
   "vitest": {
     "setupFiles": ["./vitest.setup.js"]
   }
