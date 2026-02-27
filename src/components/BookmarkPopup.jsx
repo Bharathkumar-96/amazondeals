@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Dialog, DialogContent, IconButton, Slide } from '@mui/material'
+import { Dialog, DialogContent, Typography, IconButton, Slide } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -34,6 +34,9 @@ export default function BookmarkPopup() {
       }}
     >
       <DialogContent sx={{ p: 3, pb: 1 }}>
+        <Typography variant="body1" sx={{ mb: 2, textAlign: 'center', color: 'white', fontWeight: 500 }}>
+          Bookmark our website to get best deals in the future!
+        </Typography>
         <IconButton
           onClick={handleClose}
           sx={{ 
