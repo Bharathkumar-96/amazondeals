@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Dialog, DialogContent, Typography, IconButton, Slide } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+import { setShowBookmarkPopup } from '../redux/slices/uiSlice'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />
 })
 
 export default function BookmarkPopup() {
-  const [open, setOpen] = useState(false)
+  const dispatch = useDispatch()
+  const open = useSelector(state => state.ui.showBookmarkPopup)
 
   useEffect(() => {
-    const timer = setTimeout(() => setOpen(true), 2000)
+    const timer = setTimeout(() => dispatch(setShowBookmarkPopup(true)), 2000)
     return () => clearTimeout(timer)
-  }, [])
+  }, [dispatch])
 
-  const handleClose = () => setOpen(false)
+  const handleClose = () => dispatch(setShowBookmarkPopup(false))
 
   return (
     <Dialog
@@ -39,9 +42,9 @@ export default function BookmarkPopup() {
         </Typography>
         <IconButton
           onClick={handleClose}
-          sx={{ 
-            position: 'absolute', 
-            bottom: 8, 
+          sx={{
+            position: 'absolute',
+            bottom: 8,
             right: 8,
             color: 'rgba(255,255,255,0.8)',
             '&:hover': { color: 'white', backgroundColor: 'rgba(255,255,255,0.1)' }
