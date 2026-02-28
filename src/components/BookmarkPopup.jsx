@@ -38,7 +38,7 @@ export default function BookmarkPopup() {
     >
       <DialogContent sx={{ p: 3, pb: 1 }}>
         <Typography variant="body1" sx={{ mb: 2, textAlign: 'center', color: 'white', fontWeight: 500 }}>
-          Bookmark our website to get best deals in the future!
+          Bookmark our website to get best deals in the future...!
         </Typography>
         <IconButton
           onClick={handleClose}
